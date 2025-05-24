@@ -141,6 +141,127 @@
     schedulePage.classList.add('active');
     habitsPage.classList.remove('active');
   });
+
+  // Habits functionaliteit
+  function showHabits() {
+    habitList.innerHTML = '';
+    
+    habits.forEach((habit, index) => {
+      const habitItem = document.createElement('div');
+      habitItem.className = 'habit-item';
+      
+      habitItem.innerHTML = `
+        <input type="checkbox" class="habit-checkbox" ${habit.completed ? 'checked' : ''}>
+        <span class="habit-name">${habit.name}</span>
+        <span class="habit-streak">🔥 ${habit.streak} days</span>
+        <button class="delete-btn">❌</button>
+      `;
+      
+      const checkbox = habitItem.querySelector('.habit-checkbox');
+      checkbox.addEventListener('change', () => toggleHabit(index));
+      
+      const deleteBtn = habitItem.querySelector('.delete-btn');
+      deleteBtn.addEventListener('click', () => deleteHabit(index));
+      
+      habitList.appendChild(habitItem);
+    });
+  }
+
+  addHabitBtn.addEventListener('click', () => {
+    const habitName = newHabitInput.value.trim();
+    
+    if (habitName) {
+      habits.push({
+        name: habitName,
+        completed: false,
+        streak: 0
+      });
+      
+      saveHabits();
+      showHabits();
+      newHabitInput.value = '';
+    }
+  });
+  function toggleHabit(index) {
+    habits[index].completed = !habits[index].completed;
+    
+    if (habits[index].completed) {
+      habits[index].streak++;
+    } else {
+      habits[index].streak = Math.max(0, habits[index].streak - 1);
+    }
+    
+    saveHabits();
+    showHabits();
+  }
+
+  function deleteHabit(index) {
+    habits.splice(index, 1);
+    saveHabits();
+    showHabits();
+  }
+
+  function saveHabits() {
+    localStorage.setItem('habits', JSON.stringify(habits));
+  }
+
+  // Schedule functie
+  weekdays.forEach(day => {
+    day.addEventListener('click', () => {
+      weekdays.forEach(d => d.classList.remove('active'));
+      day.classList.add('active');
+      activeDay = parseInt(day.getAttribute('data-day'));
+      showSchedule();
+    });
+    
+  });
+  function showSchedule() {
+    scheduleList.innerHTML = '';
+    
+    const daySchedule = schedules.filter(item => item.day === activeDay);
+    
+    daySchedule.sort((a, b) => a.time.localeCompare(b.time));
+    
+    daySchedule.forEach((item, index) => {
+      const scheduleItem = document.createElement('div');
+      scheduleItem.className = 'schedule-item';
+      
+      scheduleItem.innerHTML = `
+        <span class="schedule-time">${item.time}</span>
+        <span class="schedule-class">${item.class}</span>
+        <button class="delete-btn" data-index="${schedules.indexOf(item)}">❌</button>
+      `;
+      
+      const deleteBtn = scheduleItem.querySelector('.delete-btn');
+      deleteBtn.addEventListener('click', (e) => {
+        const scheduleIndex = parseInt(e.target.getAttribute('data-index'));
+        deleteScheduleItem(scheduleIndex);
+      });
+      
+      scheduleList.appendChild(scheduleItem);
+    });
+  }
+  addScheduleBtn.addEventListener('click', () => {
+    const time = scheduleTimeInput.value;
+    const className = scheduleClassInput.value.trim();
+    
+    if (time && className) {
+      schedules.push({
+        day: activeDay,
+        time: time,
+        class: className
+      });
+      
+      saveSchedule();
+      showSchedule();
+      
+      scheduleTimeInput.value = '';
+      scheduleClassInput.value = '';
+    }
+  });
+  
+
+  
     </script>
   </body>
 </html>
