@@ -99,5 +99,48 @@
         </div>
       </div>
     </div>
+    <script>
+      //DOM elementen zetten
+  const habitsBtn = document.getElementById('habits-btn');
+  const scheduleBtn = document.getElementById('schedule-btn');
+  const habitsPage = document.getElementById('habits-page');
+  const schedulePage = document.getElementById('schedule-page');
+  const todayDate = document.getElementById('today-date');
+  const newHabitInput = document.getElementById('new-habit');
+  const addHabitBtn = document.getElementById('add-habit-btn');
+  const habitList = document.getElementById('habit-list');
+  const weekdays = document.querySelectorAll('.weekday');
+  const scheduleTimeInput = document.getElementById('schedule-time');
+  const scheduleClassInput = document.getElementById('schedule-class');
+  const addScheduleBtn = document.getElementById('add-schedule-btn');
+  const scheduleList = document.getElementById('schedule-list');
+
+  // app status
+  let habits = JSON.parse(localStorage.getItem('habits')) || [];
+  let schedules = JSON.parse(localStorage.getItem('schedules')) || [];
+  let activeDay = 0; // Monday by default
+
+  // recente datum zetten
+  function showCurrentDate() {
+    const now = new Date();
+    const options = { weekday: 'long', month: 'long', day: 'numeric' };
+    todayDate.textContent = now.toLocaleDateString('nl-NL', options);
+  }
+
+  // Navigatie
+  habitsBtn.addEventListener('click', () => {
+    habitsBtn.classList.add('active');
+    scheduleBtn.classList.remove('active');
+    habitsPage.classList.add('active');
+    schedulePage.classList.remove('active');
+  });
+
+  scheduleBtn.addEventListener('click', () => {
+    scheduleBtn.classList.add('active');
+    habitsBtn.classList.remove('active');
+    schedulePage.classList.add('active');
+    habitsPage.classList.remove('active');
+  });
+    </script>
   </body>
 </html>
