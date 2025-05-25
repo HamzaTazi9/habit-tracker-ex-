@@ -259,8 +259,38 @@
       scheduleClassInput.value = '';
     }
   });
-  
+  function deleteScheduleItem(index) {
+    schedules.splice(index, 1);
+    saveSchedule();
+    showSchedule();
+  }
 
+  function saveSchedule() {
+    localStorage.setItem('schedules', JSON.stringify(schedules));
+  }
+    // Initialize app
+    function init() {
+    showCurrentDate();
+    showHabits();
+    showSchedule();
+    
+    // key habit input
+    newHabitInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addHabitBtn.click();
+      }
+    });
+    
+    // key schedule input
+    scheduleClassInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        addScheduleBtn.click();
+      }
+    });
+  }
+
+  
+  init();
   
     </script>
   </body>
