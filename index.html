@@ -61,6 +61,17 @@
         padding-top: 20px;
       }
 
+      .header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 8px;
+        letter-spacing: -0.5px;
+      }
+
       .header p {
         color: #6b7280;
         font-weight: 500;
@@ -80,7 +91,7 @@
 
       .nav-button {
         padding: 12px 24px;
-        background-color: #4a6fa5;
+        background: transparent;
         color: #6b7280;
         border: none;
         border-radius: 12px;
@@ -133,6 +144,13 @@
       .schedule-form {
         display: flex;
         gap: 12px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 20px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
       }
 
       .habit-input,
@@ -155,7 +173,7 @@
 
       .add-button {
         padding: 14px 20px;
-        background-color: linear-gradient(135deg, #667eea, #764ba2);
+        background: linear-gradient(135deg, #667eea, #764ba2);
         color: white;
         border: none;
         border-radius: 12px;
@@ -244,7 +262,7 @@
       }
 
       .habit-streak {
-        background-color: linear-gradient(135deg, #fef3c7, #fbbf24);
+        background: linear-gradient(135deg, #fef3c7, #fbbf24);
         padding: 6px 12px;
         border-radius: 20px;
         font-size: 0.85rem;
@@ -291,7 +309,7 @@
       }
 
       .weekday.active {
-        background-color: white;
+        color: white;
         transform: scale(1.1);
         box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
       }
@@ -303,22 +321,15 @@
         z-index: 1;
       }
 
-      .schedule-form {
-        display: flex;
-        margin-bottom: 15px;
-      }
-
-      .schedule-input {
-        flex: 1;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 5px 0 0 5px;
-      }
-
       .schedule-list {
         margin-bottom: 20px;
       }
-
+      .schedule-time {
+        font-weight: 600;
+        color: #667eea;
+        margin-right: 16px;
+        min-width: 60px;
+      }
       .delete-btn {
         background: linear-gradient(135deg, #fef2f2, #fee2e2);
         border: none;
@@ -355,8 +366,12 @@
           <p id="today-date">loading...</p>
         </div>
         <div class="nav-buttons">
-          <button class="nav-button active" id="habits-btn">Habits</button>
-          <button class="nav-button" id="schedule-btn">Schedule</button>
+          <button class="nav-button active" id="habits-btn">
+            <span>Habits</span>
+          </button>
+          <button class="nav-button" id="schedule-btn">
+            <span>Schedule</span>
+          </button>
         </div>
 
         <!-- Habits Page -->
@@ -378,13 +393,13 @@
         <!-- planning Pagina -->
         <div class="page" id="schedule-page">
           <div class="weekday-selector">
-            <div class="weekday active" data-day="0">M</div>
-            <div class="weekday" data-day="1">T</div>
-            <div class="weekday" data-day="2">W</div>
-            <div class="weekday" data-day="3">T</div>
-            <div class="weekday" data-day="4">F</div>
-            <div class="weekday" data-day="5">S</div>
-            <div class="weekday" data-day="6">S</div>
+            <div class="weekday active" data-day="0"><span>M</span></div>
+            <div class="weekday" data-day="1"><span>T</span></div>
+            <div class="weekday" data-day="2"><span>W</span></div>
+            <div class="weekday" data-day="3"><span>T</span></div>
+            <div class="weekday" data-day="4"><span>F</span></div>
+            <div class="weekday" data-day="5"><span>S</span></div>
+            <div class="weekday" data-day="6"><span>S</span></div>
           </div>
 
           <div class="schedule-form">
